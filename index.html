@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>피카츄야, 새를 피하라!</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <style>
+        #body {
+            overflow: hidden;
+        }
+
+        #container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+
+        }
+
+        #pika {
+            position: absolute;
+            top: 50%;
+            width: 120px;
+            left: 80%;
+            cursor: pointer;
+        }
+
+        #attack {
+            position: absolute;
+            left: 90%;
+            height: 150px;
+            width: 150px;
+            top: 80%;
+        }
+
+        #bird {
+            position: absolute;
+            width: 100px;
+            height: 50px;
+            top: 50%;
+            left: -100px;
+        }
+
+        #line {
+            position: absolute;
+            width: 100px;
+            height: 100%;
+            left: 69%
+        }
+
+        #pika1 {
+            width: 100px;
+            height: 100px;
+            left: 90%;
+            position: absolute;
+        }
+
+        #pika2 {
+            width: 100px;
+            height: 100px;
+            left: 95%;
+            position: absolute;
+        }
+    </style>
+
+    <script>
+        function attack() {
+            //S키 연타 방지
+            isAttacking = true;
+            $("#attack").animate({
+                left: "-=20%",
+                top: "-=30%"
+            }, 500).animate({
+                left: "+=20%",
+                top: "+=30%"
+            }, function () {
+                isAttacking = false;
+            });
+        }
+
+        function enemyMove() {
+            $("#bird").animate({
+                left: "110%"
+            }, (Math.random() + 1) * 3000).animate({
+                left: "-110%"
+            }, 0);
+        }
+
+        function deadCheck() {
+            let isDead = false;
+            let pika = $("#pika");
+            let bird = $("#bird");
+            let attack = $("#attack");
+
+            let pikaX = parseInt(
+                pika.css("left").replace("px", ""));
+            let pikaY = parseInt(
+                pika.css("bottom").replace("px", "")
+            );
+            let birdX = parseInt(
+                bird.css("left").replace("px", "") +
+                bird.css("width").replace("px", ""));
+            let birdY = parseInt(
+                bird.css("bottom").replace("p x", "") +
+                bird.css("height").replace("px", "")
+            );
+            let attackX = parseInt(
+                attack.css("left").replace("px", ""));
+
+            if (pikaY > birdY || attackX < birdX || pikaX > birdX) {
+                isDead = false;
+            } else {
+                isDead = true;
+            }
+            return isDead;
+        }
+        setInterval((function () {
+            enemyMove();
+            if (deadCheck()) {
+                alert("다시 시작")
+                location.reload();
+            }
+        }), 0);
+    </script>
+
+    <script type="text/javascript">
+        var count = 60;  // 타이머 시간 설정
+        var countdown = setInterval(function () {
+            $("p.countdown").html("<b><font color='black' size='50pt'>"
+                + count + "<b>초 후 <br>MISSION SUCCESS!");
+            if (count == 0) {
+                clearInterval(countdown);
+                swal({
+                    title: "피카츄가 무사히 도착했습니다",
+                    text: "축하합니다.",
+                    icon: "success"
+                })
+            }
+            count--;
+        }, 1000);
+    </script>
+</head>
+
+<body>
+    <div id="body">
+        <img id="pika" src="pika.gif" alt="" onclick="location.href= 'intro.html'">
+        <img id="container" src="land.png" alt="">
+        <img id="bird" src="bird.gif" alt="">
+        <img id="attack" src="eagle.gif" alt="">
+        <img id="line" src="line.gif" alt="">
+        <img id="pika1" src="pika_life.gif" alt="">
+        <img id="pika2" src="pika_life.gif" alt="">
+        <p class="countdown"></p>
+    </div>
+    <script>
+        let isAttacking = false;
+        window.addEventListener("keydown", function (event) {
+            switch (event.code) {
+                case "Space":
+                    if (isAttacking == false) {
+                        attack();
+                    }
+                    break;
+            }
+        });
+
+    </script>
+</body>
+
+</html>

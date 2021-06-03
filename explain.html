@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>피카츄 게임 안내사항</title>
+    <style>
+        #container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        #pika {
+            position: absolute;
+            top: 50%;
+            width: 200px;
+            height: 200px;
+            left: 80%;
+        }
+        #intro {
+            position: absolute;
+            top:25%;
+            left:25%;
+        }
+        .button{
+            text-align: center;
+            background-color: white;
+            color: blue;
+            font-size: 40px;
+            cursor: pointer;
+            top:80%;
+            left:50%;
+        }
+    </style>
+</head>
+
+<body>
+    <img id="container" src="land.png" alt="">
+    <img id="pika" src="pika.gif" alt=""><br>
+    <div id="intro"><font size = 6><b>
+        피카츄야, 새를 피하라! 게임<br>
+        스페이스바 키를 눌러서 독수리를 불러주세요.<br><br>
+        종이새가 선 안으로 들어온 이후 독수리를 출동시키면,<br>
+        독수리가 무서워서 종이새가 도망가기에 피카츄는 안전합니다!<br><br>
+        피카츄가 종이새에 부딪히면 GAME OVER!!!! <br>
+        1분 동안 살아남는다면 MISSION SUCCESS!!<br><br>
+        게임 도중 홈으로 돌아가고 싶다면 풍선피카츄를 클릭해주세요.<br>
+        피카츄가 새에 부딪히면 자동으로 다시 게임이 시작됩니다. <br><br>
+        우리 피카츄가 무사히 하늘을 날라갈 수 있게 도와주세요!
+    </b></font></div>
+    <button class="button" onclick="location.href= 'intro.html'">홈으로 돌아가기</button>
+    <button class="button" onclick="location.href= 'index.html'">게임하러 가기</button>
+</body>
+
+</html>
